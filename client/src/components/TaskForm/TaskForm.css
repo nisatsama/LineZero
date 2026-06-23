@@ -1,0 +1,191 @@
+.task-container {
+  display: flex;
+  justify-content: center;
+  padding: 40px;
+  background: transparent;
+}
+
+.task-card {
+  width: 90%;
+  max-width: 950px;
+  background: #fff8fb;
+  border-radius: 28px;
+  padding: 30px;
+  box-shadow: 0 12px 35px rgba(255, 182, 193, 0.25);
+}
+
+.task-card h2 {
+  text-align: center;
+  color: #631d76;
+  margin-bottom: 25px;
+  font-size: 2rem;
+}
+
+.input-group {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.input-group input[type="text"] {
+  flex: 1;
+  min-width: 300px;
+  padding: 16px;
+  border: none;
+  outline: none;
+  border-radius: 18px;
+  background: #ffffff;
+  font-size: 1rem;
+  box-shadow: 0 4px 15px rgba(255, 182, 193, 0.2);
+}
+
+.date-input {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #ffe8f0;
+  padding: 0 16px;
+  border-radius: 18px;
+  color: #d15d8f;
+}
+
+.date-input input {
+  border: none;
+  background: transparent;
+  outline: none;
+  padding: 16px 0;
+  font-size: 1rem;
+  color: #631d76;
+}
+
+.add-btn {
+  border: none;
+  cursor: pointer;
+  padding: 12px 22px;
+  border-radius: 16px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  transition: 0.3s;
+  background: #ffb6c1;
+  color: #631d76;
+}
+
+.edit-btn {
+  background: #ffd9e5;
+  color: #631d76;
+}
+
+.delete-btn {
+  background: #ff8fab;
+  color: white;
+}
+
+.button-group button:hover {
+  transform: translateY(-3px);
+}
+
+.ai-box {
+  margin-top: 25px;
+  background: linear-gradient(135deg, #ffe4ec, #fff0f6);
+  border-radius: 20px;
+  padding: 20px;
+  color: #631d76;
+  font-weight: 500;
+  border: 2px dashed #ffb6c1;
+}
+
+.task-list {
+  margin-top: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.task-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: white;
+  padding: 18px;
+  border-radius: 18px;
+  box-shadow: 0 5px 15px rgba(255, 182, 193, 0.15);
+}
+
+.task-content {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+.complete-btn {
+  background: #d4f8d4 !important;
+  color: #2e7d32 !important;
+}
+
+.complete-btn:hover {
+  transform: scale(1.08);
+}
+.completed {
+  opacity: 0.7;
+  background: #f8fff8;
+}
+
+.completed p {
+  text-decoration: line-through;
+  color: #888;
+}
+
+.completed .leaf-icon {
+  color: #4caf50;
+}
+.leaf-icon {
+  color: #66bb6a;
+  font-size: 1.3rem;
+}
+
+.task-content p {
+  margin: 0;
+  color: #631d76;
+  font-weight: 600;
+}
+
+.task-content span {
+  font-size: 0.85rem;
+  color: #777;
+}
+
+.task-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.task-actions button {
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  cursor: pointer;
+  background: #ffe8f0;
+  color: #631d76;
+  transition: 0.3s;
+}
+
+.task-actions button:hover {
+  background: #ffb6c1;
+  transform: scale(1.08);
+}
+
+@media (max-width: 768px) {
+  .input-group {
+    flex-direction: column;
+  }
+
+  .button-group {
+    justify-content: center;
+  }
+
+  .task-item {
+    flex-direction: column;
+    gap: 15px;
+    align-items: flex-start;
+  }
+}
