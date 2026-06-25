@@ -157,12 +157,13 @@ const markCompleted = async (req, res) => {
       });
     }
 
-    task.completed = true;
+    task.completed = !task.completed;
+
     await task.save();
 
     res.status(200).json({
       success: true,
-      message: "Task marked as completed",
+      message: "Task status updated successfully",
       task,
     });
   } catch (error) {

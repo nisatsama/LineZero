@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   FaLeaf,
   FaPlus,
@@ -7,39 +7,59 @@ import {
   FaCalendarAlt,
   FaCheck,
 } from "react-icons/fa";
-import "./TaskForm.css";
 import axios from "axios";
-import { useEffect } from "react";
+import "./TaskForm.css";
 
 const TaskForm = () => {
   const [task, setTask] = useState("");
   const [deadline, setDeadline] = useState("");
   const [tasks, setTasks] = useState([]);
+  const [editingId, setEditingId] = useState(null);
+
+  // Fetch tasks
   useEffect(() => {
     axios
       .get("http://localhost:8080/tasks")
       .then((res) => {
         console.log("Backend Connected ✅");
-        console.log(res.data.tasks);
+        setTasks(res.data.tasks);
       })
       .catch((err) => {
-        console.error("Connection Failed ❌");
-        console.error(err);
+        console.error("Connection Failed ❌", err);
       });
   }, []);
+
+  // Add or Update Task
   const addTask = async () => {
     if (!task.trim()) return;
 
     try {
-      const res = await axios.post("http://localhost:8080/tasks", {
-        task,
-        deadline,
-      });
+      if (editingId) {
+        // Update existing task
+        const res = await axios.put(
+          `http://localhost:8080/tasks/${editingId}`,
+          {
+            task,
+            deadline,
+          },
+        );
 
-      console.log("Saved to DB ✅", res.data);
+        setTasks((prevTasks) =>
+          prevTasks.map((item) =>
+            item._id === editingId ? res.data.task : item,
+          ),
+        );
 
-      // update UI with DB response
-      setTasks([...tasks, res.data.task]);
+        setEditingId(null);
+      } else {
+        // Create new task
+        const res = await axios.post("http://localhost:8080/tasks", {
+          task,
+          deadline,
+        });
+
+        setTasks((prevTasks) => [...prevTasks, res.data.task]);
+      }
 
       setTask("");
       setDeadline("");
@@ -48,25 +68,56 @@ const TaskForm = () => {
     }
   };
 
-  const deleteTask = (id) => {
-    setTasks(tasks.filter((item) => item.id !== id));
+  // Delete Task
+  const deleteTask = async (id) => {
+    try {
+      await axios.delete(`http://localhost:8080/tasks/${id}`);
+
+      setTasks((prevTasks) => prevTasks.filter((item) => item._id !== id));
+
+      console.log("Task deleted successfully ✅");
+    } catch (error) {
+      console.error("Error deleting task:", error);
+    }
   };
 
+  // Edit Task
   const editTask = (id) => {
-    const selected = tasks.find((item) => item.id === id);
+    const selected = tasks.find((item) => item._id === id);
 
-    setTask(selected.text);
-    setDeadline(selected.deadline);
+    if (!selected) return;
 
-    setTasks(tasks.filter((item) => item.id !== id));
-  };
-  const toggleComplete = (id) => {
-    setTasks(
-      tasks.map((task) =>
-        task.id === id ? { ...task, completed: !task.completed } : task,
-      ),
+    setTask(selected.task);
+    setDeadline(
+      selected.deadline
+        ? new Date(selected.deadline).toISOString().slice(0, 16)
+        : "",
     );
+
+    setEditingId(id);
   };
+
+  // Toggle Complete
+  const toggleComplete = async (id) => {
+    try {
+      const selected = tasks.find((item) => item._id === id);
+
+      if (!selected) return;
+
+      const res = await axios.put(`http://localhost:8080/tasks/${id}`, {
+        task: selected.task,
+        deadline: selected.deadline,
+        completed: !selected.completed,
+      });
+
+      setTasks((prevTasks) =>
+        prevTasks.map((item) => (item._id === id ? res.data.task : item)),
+      );
+    } catch (error) {
+      console.error("Error updating task:", error);
+    }
+  };
+
   return (
     <div className="task-container">
       <div className="task-card">
@@ -88,8 +139,10 @@ const TaskForm = () => {
               onChange={(e) => setDeadline(e.target.value)}
             />
           </div>
+
           <button className="add-btn" onClick={addTask}>
-            <FaPlus /> Add Task
+            <FaPlus />
+            {editingId ? " Update Task" : " Add Task"}
           </button>
         </div>
 
@@ -108,23 +161,30 @@ const TaskForm = () => {
 
                 <div>
                   <p>{item.task}</p>
-                  {item.deadline && <span>📅 {item.deadline}</span>}
+
+                  {item.deadline && (
+                    <span>📅 {new Date(item.deadline).toLocaleString()}</span>
+                  )}
                 </div>
               </div>
 
               <div className="task-actions">
                 <button
                   className="complete-btn"
-                  onClick={() => toggleComplete(item.id)}
+                  onClick={() => toggleComplete(item._id)}
+                  title="Mark Complete"
                 >
                   <FaCheck />
                 </button>
 
-                <button onClick={() => editTask(item.id)}>
+                <button onClick={() => editTask(item._id)} title="Edit Task">
                   <FaEdit />
                 </button>
 
-                <button onClick={() => deleteTask(item.id)}>
+                <button
+                  onClick={() => deleteTask(item._id)}
+                  title="Delete Task"
+                >
                   <FaTrash />
                 </button>
               </div>

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { FiBell, FiSearch, FiUser } from "react-icons/fi";
 import { FaFire } from "react-icons/fa";
 import { GiBullseye } from "react-icons/gi";
@@ -49,13 +50,14 @@ const Navbar = () => {
       </div>
 
       {/* Bottom Row */}
+      {/* Bottom Row */}
       <div className="navbar-bottom">
-        <a href="/">Today</a>
-        <a href="/">Planner</a>
-        <a href="/">AI Coach</a>
-        <a href="/">Analytics</a>
-        <a href="/">Notes</a>
-        <a href="/">Projects</a>
+        <Link to="/today">Today</Link>
+        <Link to="/planner">Planner</Link>
+        <Link to="/ai-coach">AI Coach</Link>
+        <Link to="/analytics">Analytics</Link>
+        <Link to="/notes">Notes</Link>
+        <Link to="/projects">Projects</Link>
       </div>
     </nav>
   );
