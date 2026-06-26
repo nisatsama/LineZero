@@ -1,0 +1,333 @@
+.notes-page {
+  box-sizing: border-box;
+  font-family: "Comic Sans MS", "Poppins", sans-serif;
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  overflow: hidden;
+}
+
+/* ================= LEFT DIARY ================= */
+
+.diary-page {
+  flex: 1;
+  margin: 25px;
+  border-radius: 28px;
+
+  background: #fff6f6;
+  border: 4px solid #ffd6e8;
+
+  position: relative;
+
+  overflow: hidden;
+
+  box-shadow:
+    0 15px 40px rgba(0, 0, 0, 0.12),
+    inset 0 0 20px rgba(255, 255, 255, 0.7);
+}
+
+/* notebook paper */
+
+.diary-page::before {
+  content: "";
+
+  position: absolute;
+  inset: 25px;
+
+  border-radius: 18px;
+
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0px,
+    transparent 37px,
+    rgba(255, 180, 195, 0.45) 38px,
+    rgba(255, 180, 195, 0.45) 40px
+  );
+}
+
+/* paper texture */
+
+.diary-page::after {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  opacity: 0.08;
+
+  background-image: radial-gradient(#999 1px, transparent 1px);
+
+  background-size: 18px 18px;
+}
+
+/* ================= TEXTAREA ================= */
+
+textarea {
+  position: absolute;
+
+  inset: 60px 55px;
+
+  resize: none;
+
+  border: none;
+
+  outline: none;
+
+  background: transparent;
+
+  font-size: 20px;
+
+  line-height: 40px;
+
+  color: #555;
+
+  z-index: 5;
+
+  cursor:
+    url("https://cdn-icons-png.flaticon.com/512/3039/3039386.png") 0 28,
+    auto;
+}
+
+textarea::placeholder {
+  color: #d18ba0;
+}
+
+/* ================= STICKERS ================= */
+
+.sticker {
+  position: absolute;
+
+  z-index: 10;
+
+  font-size: 40px;
+
+  user-select: none;
+}
+
+.cloud {
+  left: 35px;
+  top: 30px;
+}
+
+.star {
+  right: 70px;
+  top: 50px;
+}
+
+.heart {
+  left: 35px;
+  top: 330px;
+
+  color: #ff7ea8;
+}
+
+.milk {
+  right: 50px;
+  bottom: 35px;
+}
+
+/* ================= WASHI ================= */
+
+.washi {
+  position: absolute;
+
+  top: 0;
+
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  width: 130px;
+
+  height: 35px;
+
+  border-radius: 0 0 8px 8px;
+}
+
+.purple {
+  background: #ccccff;
+
+  opacity: 0.8;
+}
+
+/* ================= RIGHT PANEL ================= */
+
+.notes-panel {
+  width: 360px;
+
+  background: #e6e6fa;
+
+  border-radius: 30px 0 0 30px;
+
+  transition: 0.45s;
+
+  position: relative;
+
+  overflow: hidden;
+
+  box-shadow: -8px 0 25px rgba(0, 0, 0, 0.12);
+}
+
+.notes-panel.closed {
+  width: 70px;
+}
+
+.panel-content {
+  padding: 25px;
+
+  transition: 0.3s;
+}
+
+.notes-panel.closed .panel-content {
+  opacity: 0;
+
+  pointer-events: none;
+}
+
+.panel-content h2 {
+  background: #ccccff;
+
+  padding: 15px;
+
+  border-radius: 18px;
+
+  text-align: center;
+
+  color: #6f5cc4;
+
+  margin-bottom: 25px;
+}
+
+/* ================= NOTES ================= */
+
+.notes-list {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 18px;
+}
+
+.note-card {
+  position: relative;
+
+  border-radius: 18px;
+
+  padding: 22px;
+
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
+
+  transition: 0.25s;
+}
+
+.note-card:hover {
+  transform: translateY(-5px) rotate(-1deg);
+}
+
+.note-card h3 {
+  color: #555;
+
+  margin-bottom: 8px;
+}
+
+.note-card p {
+  color: #8d7b8f;
+}
+
+.card-tape {
+  position: absolute;
+
+  top: -8px;
+
+  left: 18px;
+
+  width: 70px;
+
+  height: 18px;
+
+  background: #ffdae9;
+
+  opacity: 0.8;
+
+  transform: rotate(-12deg);
+
+  border-radius: 3px;
+}
+
+/* ================= TOGGLE ================= */
+
+.toggle-btn {
+  position: absolute;
+
+  left: -18px;
+
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  width: 38px;
+
+  height: 70px;
+
+  border: none;
+
+  border-radius: 25px;
+
+  background: #99ffff;
+
+  cursor: pointer;
+
+  font-size: 20px;
+
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* ================= CLOSED TITLE ================= */
+
+.vertical-title {
+  writing-mode: vertical-rl;
+
+  transform: rotate(180deg);
+
+  position: absolute;
+
+  top: 50%;
+
+  left: 18px;
+
+  transform-origin: center;
+
+  translate: 0 -50%;
+
+  font-size: 26px;
+
+  color: #5e5aae;
+
+  font-weight: bold;
+
+  letter-spacing: 2px;
+}
+
+/* ================= SCROLL ================= */
+
+.notes-list {
+  max-height: 80vh;
+
+  overflow-y: auto;
+
+  padding-right: 6px;
+}
+
+.notes-list::-webkit-scrollbar {
+  width: 8px;
+}
+
+.notes-list::-webkit-scrollbar-thumb {
+  background: #ccccff;
+
+  border-radius: 10px;
+}
+
+.notes-list::-webkit-scrollbar-track {
+  background: transparent;
+}

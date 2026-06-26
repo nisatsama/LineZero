@@ -3,28 +3,35 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
-
+const cookieParser = require("cookie-parser");
 const taskRoutes = require("./routes/taskRoutes");
-
+const profileRoutes = require("./routes/profileRoutes");
 const app = express();
+const authRoutes = require("./routes/authRoutes");
 
+// Middleware
 // Middleware
 app.use(
   cors({
     origin: "http://localhost:5173",
-    methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
     credentials: true,
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
   }),
 );
 
 app.use(express.json());
+app.use(cookieParser());
+
 app.use((req, res, next) => {
   console.log(`${req.method} ${req.url}`);
   next();
 });
-// Routes
-app.use("/tasks", taskRoutes);
 
+// Routes
+
+app.use("/tasks", taskRoutes);
+app.use("/auth", authRoutes);
+app.use("/profile", profileRoutes);
 app.get("/", (req, res) => {
   res.send("ZeroLine Backend Running 🚀");
 });

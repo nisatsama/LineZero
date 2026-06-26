@@ -43,21 +43,21 @@ const Navbar = () => {
             <FiBell />
           </button>
 
-          <button className="profile-btn">
+          <Link to="/profile" className="profile-btn">
             <FiUser />
-          </button>
+          </Link>
         </div>
       </div>
 
       {/* Bottom Row */}
       {/* Bottom Row */}
       <div className="navbar-bottom">
+        <Link to="/">Home</Link>
         <Link to="/today">Today</Link>
         <Link to="/planner">Planner</Link>
-        <Link to="/ai-coach">AI Coach</Link>
+
         <Link to="/analytics">Analytics</Link>
         <Link to="/notes">Notes</Link>
-        <Link to="/projects">Projects</Link>
       </div>
     </nav>
   );

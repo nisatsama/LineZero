@@ -1,0 +1,214 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+.signup-page {
+  width: 100%;
+  min-height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  overflow: hidden;
+
+  position: relative;
+
+  background: linear-gradient(135deg, #ffe4e1, #fff0f5, #e6e6fa, #afdbf5);
+}
+
+.signup-card {
+  width: 450px;
+
+  padding: 40px;
+
+  background: rgba(255, 255, 255, 0.35);
+
+  backdrop-filter: blur(18px);
+
+  border-radius: 30px;
+
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+
+  text-align: center;
+
+  z-index: 2;
+}
+
+.signup-card h1 {
+  color: #ff69b4;
+  margin-bottom: 8px;
+}
+
+.signup-card h2 {
+  color: #555;
+  margin-bottom: 8px;
+}
+
+.signup-card p {
+  color: #666;
+  margin-bottom: 25px;
+}
+
+.input-group {
+  text-align: left;
+  margin-bottom: 18px;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 8px;
+
+  color: #666;
+
+  font-weight: 600;
+}
+
+.input-group input {
+  width: 100%;
+
+  padding: 14px;
+
+  border: none;
+
+  outline: none;
+
+  border-radius: 15px;
+
+  font-size: 15px;
+
+  background: white;
+}
+
+.password-box {
+  position: relative;
+}
+
+.password-box input {
+  padding-right: 55px;
+}
+
+.show-btn {
+  position: absolute;
+
+  top: 50%;
+  right: 15px;
+
+  transform: translateY(-50%);
+
+  background: none;
+
+  border: none;
+
+  cursor: pointer;
+
+  font-size: 18px;
+}
+
+.signup-btn {
+  width: 100%;
+
+  padding: 15px;
+
+  margin-top: 10px;
+
+  border: none;
+
+  border-radius: 18px;
+
+  background: #ffb7c5;
+
+  color: white;
+
+  font-size: 17px;
+
+  font-weight: bold;
+
+  cursor: pointer;
+
+  transition: 0.3s;
+}
+
+.signup-btn:hover {
+  background: #ff8fb1;
+  transform: translateY(-2px);
+}
+
+.bottom-text {
+  margin-top: 22px;
+
+  color: #555;
+}
+
+.bottom-text a {
+  text-decoration: none;
+
+  color: #ff69b4;
+
+  font-weight: bold;
+}
+
+.floating-circle {
+  position: absolute;
+
+  border-radius: 50%;
+
+  opacity: 0.35;
+
+  animation: float 8s ease-in-out infinite;
+}
+
+.circle1 {
+  width: 220px;
+  height: 220px;
+
+  background: #99ffff;
+
+  top: 10%;
+  left: 8%;
+}
+
+.circle2 {
+  width: 170px;
+  height: 170px;
+
+  background: #ffdae9;
+
+  bottom: 10%;
+  right: 10%;
+}
+
+.circle3 {
+  width: 140px;
+  height: 140px;
+
+  background: #ccccff;
+
+  top: 18%;
+  right: 18%;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-25px);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 500px) {
+  .signup-card {
+    width: 92%;
+
+    padding: 30px;
+  }
+}

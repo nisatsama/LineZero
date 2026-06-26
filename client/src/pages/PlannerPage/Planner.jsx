@@ -20,7 +20,7 @@ export default function Planner() {
 
   useEffect(() => {
     async function fetchTasks() {
-      const res = await fetch("/tasks");
+      const res = await fetch(`http://localhost:8080/tasks`);
       const data = await res.json();
       setTasks(data.tasks);
     }
