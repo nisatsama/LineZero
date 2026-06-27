@@ -10,6 +10,7 @@ const createTask = async (req, res) => {
     const { task, deadline } = req.body;
 
     const newTask = await Task.create({
+      user: req.user.id,
       task,
       deadline,
     });
@@ -21,7 +22,7 @@ const createTask = async (req, res) => {
       task: newTask,
     });
   } catch (error) {
-    console.error("Create Error:", error);
+    console.error(error);
 
     res.status(500).json({
       success: false,
@@ -29,32 +30,26 @@ const createTask = async (req, res) => {
     });
   }
 };
-// const createTask = async (req, res) => {
-//   try {
-//     const { task, deadline } = req.body;
-
-//     const newTask = await Task.create({
-//       task,
-//       deadline,
-//     });
-
-//     res.status(201).json({
-//       success: true,
-//       message: "Task created successfully",
-//       task: newTask,
-//     });
-//   } catch (error) {
-//     res.status(500).json({
-//       success: false,
-//       message: error.message,
-//     });
-//   }
-// };
 
 // Get All Tasks
 const getAllTasks = async (req, res) => {
   try {
-    const tasks = await Task.find().sort({ deadline: 1 });
+    const filter = {
+      user: req.user.id,
+    };
+
+    if (req.query.deadline) {
+      const start = new Date(req.query.deadline);
+      const end = new Date(start);
+      end.setDate(end.getDate() + 1);
+
+      filter.deadline = {
+        $gte: start,
+        $lt: end,
+      };
+    }
+
+    const tasks = await Task.find(filter).sort({ deadline: 1 });
 
     res.status(200).json({
       success: true,
@@ -62,6 +57,8 @@ const getAllTasks = async (req, res) => {
       tasks,
     });
   } catch (error) {
+    console.error(error);
+
     res.status(500).json({
       success: false,
       message: error.message,
@@ -72,7 +69,10 @@ const getAllTasks = async (req, res) => {
 // Get Single Task
 const getTaskById = async (req, res) => {
   try {
-    const task = await Task.findById(req.params.id);
+    const task = await Task.findOne({
+      _id: req.params.id,
+      user: req.user.id,
+    });
 
     if (!task) {
       return res.status(404).json({
@@ -86,6 +86,8 @@ const getTaskById = async (req, res) => {
       task,
     });
   } catch (error) {
+    console.error(error);
+
     res.status(500).json({
       success: false,
       message: error.message,
@@ -96,10 +98,17 @@ const getTaskById = async (req, res) => {
 // Update Task
 const updateTask = async (req, res) => {
   try {
-    const task = await Task.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-      runValidators: true,
-    });
+    const task = await Task.findOneAndUpdate(
+      {
+        _id: req.params.id,
+        user: req.user.id,
+      },
+      req.body,
+      {
+        new: true,
+        runValidators: true,
+      },
+    );
 
     if (!task) {
       return res.status(404).json({
@@ -114,6 +123,8 @@ const updateTask = async (req, res) => {
       task,
     });
   } catch (error) {
+    console.error(error);
+
     res.status(500).json({
       success: false,
       message: error.message,
@@ -124,7 +135,10 @@ const updateTask = async (req, res) => {
 // Delete Task
 const deleteTask = async (req, res) => {
   try {
-    const task = await Task.findByIdAndDelete(req.params.id);
+    const task = await Task.findOneAndDelete({
+      _id: req.params.id,
+      user: req.user.id,
+    });
 
     if (!task) {
       return res.status(404).json({
@@ -138,6 +152,8 @@ const deleteTask = async (req, res) => {
       message: "Task deleted successfully",
     });
   } catch (error) {
+    console.error(error);
+
     res.status(500).json({
       success: false,
       message: error.message,
@@ -148,7 +164,10 @@ const deleteTask = async (req, res) => {
 // Mark Complete
 const markCompleted = async (req, res) => {
   try {
-    const task = await Task.findById(req.params.id);
+    const task = await Task.findOne({
+      _id: req.params.id,
+      user: req.user.id,
+    });
 
     if (!task) {
       return res.status(404).json({
@@ -167,6 +186,8 @@ const markCompleted = async (req, res) => {
       task,
     });
   } catch (error) {
+    console.error(error);
+
     res.status(500).json({
       success: false,
       message: error.message,

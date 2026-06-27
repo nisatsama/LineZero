@@ -9,7 +9,13 @@ import {
 } from "react-icons/fa";
 import axios from "axios";
 import "./TaskForm.css";
+const token = localStorage.getItem("token");
 
+const config = {
+  headers: {
+    Authorization: `Bearer ${token}`,
+  },
+};
 const TaskForm = () => {
   const [task, setTask] = useState("");
   const [deadline, setDeadline] = useState("");
@@ -19,7 +25,7 @@ const TaskForm = () => {
   // Fetch tasks
   useEffect(() => {
     axios
-      .get("http://localhost:8080/tasks")
+      .get("http://localhost:8080/tasks", config)
       .then((res) => {
         console.log("Backend Connected ✅");
         setTasks(res.data.tasks);
@@ -42,6 +48,7 @@ const TaskForm = () => {
             task,
             deadline,
           },
+          config,
         );
 
         setTasks((prevTasks) =>
@@ -53,10 +60,14 @@ const TaskForm = () => {
         setEditingId(null);
       } else {
         // Create new task
-        const res = await axios.post("http://localhost:8080/tasks", {
-          task,
-          deadline,
-        });
+        const res = await axios.post(
+          "http://localhost:8080/tasks",
+          {
+            task,
+            deadline,
+          },
+          config,
+        );
 
         setTasks((prevTasks) => [...prevTasks, res.data.task]);
       }
@@ -71,7 +82,7 @@ const TaskForm = () => {
   // Delete Task
   const deleteTask = async (id) => {
     try {
-      await axios.delete(`http://localhost:8080/tasks/${id}`);
+      await axios.delete(`http://localhost:8080/tasks/${id}`, config);
 
       setTasks((prevTasks) => prevTasks.filter((item) => item._id !== id));
 
@@ -104,11 +115,15 @@ const TaskForm = () => {
 
       if (!selected) return;
 
-      const res = await axios.put(`http://localhost:8080/tasks/${id}`, {
-        task: selected.task,
-        deadline: selected.deadline,
-        completed: !selected.completed,
-      });
+      const res = await axios.put(
+        `http://localhost:8080/tasks/${id}`,
+        {
+          task: selected.task,
+          deadline: selected.deadline,
+          completed: !selected.completed,
+        },
+        config,
+      );
 
       setTasks((prevTasks) =>
         prevTasks.map((item) => (item._id === id ? res.data.task : item)),
@@ -147,7 +162,7 @@ const TaskForm = () => {
         </div>
 
         <div className="ai-box">
-          ✨ AI Analysis will appear here once task priority is added.
+          ✨ AI Analytics will appear here once task priority is added.
         </div>
 
         <div className="task-list">

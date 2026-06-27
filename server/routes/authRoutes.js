@@ -9,7 +9,7 @@ const protect = require("../middleware/authMiddleware");
 router.post("/signup", signup);
 router.post("/login", login);
 router.post("/logout", logout);
-router.get("/me", protect, me);
+//router.get("/me", protect, me);
 // Protected route
 router.get("/dashboard", protect, (req, res) => {
   res.json({

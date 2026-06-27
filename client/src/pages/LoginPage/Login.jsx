@@ -1,8 +1,11 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 import "./login.css";
 
 const Login = () => {
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -17,13 +20,28 @@ const Login = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log(formData);
+    try {
+      const res = await axios.post(
+        "http://localhost:8080/auth/login",
+        formData,
+      );
 
-    // TODO:
-    // Connect Login API
+      // Save token
+      localStorage.setItem("token", res.data.token);
+
+      // Save user
+      localStorage.setItem("user", JSON.stringify(res.data.user));
+
+      alert(res.data.message);
+
+      // Go to home page
+      navigate("/");
+    } catch (err) {
+      alert(err.response?.data?.message || "Login failed.");
+    }
   };
 
   return (
@@ -74,7 +92,9 @@ const Login = () => {
             </div>
           </div>
 
-          <button className="login-btn">Login</button>
+          <button type="submit" className="login-btn">
+            Login
+          </button>
         </form>
 
         <div className="bottom-text">

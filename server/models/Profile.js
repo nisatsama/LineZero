@@ -9,11 +9,6 @@ const profileSchema = new mongoose.Schema(
       unique: true,
     },
 
-    avatar: {
-      type: String,
-      default: "",
-    },
-
     bio: {
       type: String,
       default: "",

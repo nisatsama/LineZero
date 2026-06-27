@@ -1,4 +1,5 @@
 // Planner.jsx
+import axios from "axios";
 import React, { useEffect, useMemo, useState } from "react";
 import "./planner.css";
 
@@ -19,11 +20,23 @@ export default function Planner() {
   const theme = getTheme(month);
 
   useEffect(() => {
-    async function fetchTasks() {
-      const res = await fetch(`http://localhost:8080/tasks`);
-      const data = await res.json();
-      setTasks(data.tasks);
-    }
+    const fetchTasks = async () => {
+      try {
+        const token = localStorage.getItem("token");
+
+        const res = await axios.get("http://localhost:8080/tasks", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        setTasks(res.data.tasks || []);
+      } catch (err) {
+        console.error(err);
+        setTasks([]);
+      }
+    };
+
     fetchTasks();
   }, []);
 

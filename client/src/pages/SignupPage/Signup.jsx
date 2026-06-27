@@ -1,10 +1,13 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 import "./signup.css";
 
 const Signup = () => {
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
-    username: "",
+    name: "",
     email: "",
     password: "",
     confirmPassword: "",
@@ -20,7 +23,7 @@ const Signup = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (formData.password !== formData.confirmPassword) {
@@ -28,10 +31,20 @@ const Signup = () => {
       return;
     }
 
-    console.log(formData);
+    try {
+      const res = await axios.post("http://localhost:8080/auth/signup", {
+        name: formData.name,
+        email: formData.email,
+        password: formData.password,
+      });
 
-    // TODO:
-    // Connect Signup API
+      alert(res.data.message);
+
+      // optional: directly go to login
+      navigate("/login");
+    } catch (err) {
+      alert(err.response?.data?.message || "Signup failed");
+    }
   };
 
   return (
@@ -47,13 +60,12 @@ const Signup = () => {
 
         <form onSubmit={handleSubmit}>
           <div className="input-group">
-            <label>Username</label>
-
+            <label>Name</label>
             <input
               type="text"
-              placeholder="Choose a username"
-              name="username"
-              value={formData.username}
+              placeholder="Enter your name"
+              name="name"
+              value={formData.name}
               onChange={handleChange}
               required
             />
@@ -61,7 +73,6 @@ const Signup = () => {
 
           <div className="input-group">
             <label>Email</label>
-
             <input
               type="email"
               placeholder="Enter your email"
@@ -118,7 +129,9 @@ const Signup = () => {
             </div>
           </div>
 
-          <button className="signup-btn">Create Account</button>
+          <button type="submit" className="signup-btn">
+            Create Account
+          </button>
         </form>
 
         <div className="bottom-text">

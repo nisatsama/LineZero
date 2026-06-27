@@ -8,7 +8,8 @@ const taskRoutes = require("./routes/taskRoutes");
 const profileRoutes = require("./routes/profileRoutes");
 const app = express();
 const authRoutes = require("./routes/authRoutes");
-
+const aiRoutes = require("./routes/aiRoutes");
+const analyticsRoutes = require("./routes/analyticsRoutes");
 // Middleware
 // Middleware
 app.use(
@@ -32,6 +33,8 @@ app.use((req, res, next) => {
 app.use("/tasks", taskRoutes);
 app.use("/auth", authRoutes);
 app.use("/profile", profileRoutes);
+app.use("/ai", aiRoutes);
+app.use("/analytics", analyticsRoutes);
 app.get("/", (req, res) => {
   res.send("ZeroLine Backend Running 🚀");
 });

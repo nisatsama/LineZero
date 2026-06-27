@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import "./today.css";
+import AIbox from "../../components/AI/AIbox";
 
 const getTimeTheme = () => {
   const hour = new Date().getHours();
@@ -22,19 +23,21 @@ const Today = ({ userName = "Nisat" }) => {
   useEffect(() => {
     const fetchTodayTasks = async () => {
       try {
+        const token = localStorage.getItem("token");
+
         const res = await fetch(
           `http://localhost:8080/tasks?deadline=${today}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          },
         );
 
         const data = await res.json();
 
-        // 🔥 FIX: ensure tasks is always an array
-        if (Array.isArray(data)) {
-          setTasks(data);
-        } else if (Array.isArray(data?.tasks)) {
+        if (Array.isArray(data.tasks)) {
           setTasks(data.tasks);
-        } else if (Array.isArray(data?.data)) {
-          setTasks(data.data);
         } else {
           setTasks([]);
         }
@@ -123,6 +126,7 @@ const Today = ({ userName = "Nisat" }) => {
           </div>
         </div>
       </div>
+      <AIbox />
     </div>
   );
 };

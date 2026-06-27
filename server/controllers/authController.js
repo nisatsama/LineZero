@@ -6,10 +6,10 @@ const jwt = require("jsonwebtoken");
 
 const signup = async (req, res) => {
   try {
-    const { username, email, password } = req.body;
-
+    const { name, email, password } = req.body;
+    console.log("BODY RECEIVED:", req.body);
     // Check for missing fields
-    if (!username || !email || !password) {
+    if (!name || !email || !password) {
       return res.status(400).json({
         success: false,
         message: "All fields are required",
@@ -31,7 +31,7 @@ const signup = async (req, res) => {
 
     // Create user
     const user = await User.create({
-      username,
+      name,
       email,
       password: hashedPassword,
     });
@@ -45,7 +45,7 @@ const signup = async (req, res) => {
       message: "User created successfully",
       user: {
         id: user._id,
-        username: user.username,
+        name: user.name,
         email: user.email,
       },
     });
@@ -76,7 +76,7 @@ const login = async (req, res) => {
     if (!user) {
       return res.status(401).json({
         success: false,
-        message: "Invalid email or password",
+        message: "No user found, with this email or password, please Signup",
       });
     }
 
@@ -104,10 +104,9 @@ const login = async (req, res) => {
     // Remove password before sending user
     const userData = {
       id: user._id,
-      username: user.username,
+      name: user.name,
       email: user.email,
       bio: user.bio,
-      avatar: user.avatar,
     };
 
     res.status(200).json({

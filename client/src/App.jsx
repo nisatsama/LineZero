@@ -13,7 +13,7 @@ import TaskForm from "./components/TaskForm/TaskForm";
 import Today from "./pages/TodayPage/Today";
 import Planner from "./pages/PlannerPage/Planner";
 import Notes from "./pages/NotesPage/Notes";
-
+import Analytics from "./pages/AnalyticsPage/Analytics";
 // Layout for authenticated users
 const AppLayout = ({ children }) => (
   <>
@@ -73,7 +73,16 @@ const App = () => {
           </ProtectedRoute>
         }
       />
-
+      <Route
+        path="/analytics"
+        element={
+          <ProtectedRoute>
+            <AppLayout>
+              <Analytics />
+            </AppLayout>
+          </ProtectedRoute>
+        }
+      />
       <Route
         path="/profile"
         element={

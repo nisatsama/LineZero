@@ -1,8 +1,11 @@
+const Profile = require("../models/Profile");
 const getProfile = async (req, res) => {
+  console.log("REQ USER:", req.user);
+
   try {
     const profile = await Profile.findOne({
       user: req.user.id,
-    });
+    }).populate("user", "name email"); // 🔥 THIS IS THE FIX
 
     if (!profile) {
       return res.status(404).json({
@@ -16,6 +19,7 @@ const getProfile = async (req, res) => {
       profile,
     });
   } catch (error) {
+    console.error("PROFILE ERROR:", error);
     res.status(500).json({
       success: false,
       message: "Server Error",
@@ -24,7 +28,7 @@ const getProfile = async (req, res) => {
 };
 const updateProfile = async (req, res) => {
   try {
-    const { bio, avatar } = req.body;
+    const { bio } = req.body;
 
     const profile = await Profile.findOneAndUpdate(
       {
@@ -32,7 +36,6 @@ const updateProfile = async (req, res) => {
       },
       {
         bio,
-        avatar,
       },
       {
         new: true,
