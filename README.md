@@ -75,7 +75,35 @@ Built with modern web technologies and deployed on **Google Cloud**, ZeroLine de
 * Desktop & Mobile support
 
 ---
+### Project Gallery
 
+<table>
+  <tr>
+    <td align="center"><b>Add Task & Pomodoro</b><br><img src="/ZeroLineImages/AddtaskandPomodo.png" width="300"/></td>
+    <td align="center"><b>AI Coach</b><br><img src="/ZeroLineImages/AICoach.png" width="300"/></td>
+    <td align="center"><b>Analytics 6</b><br><img src="/ZeroLineImages/Analytics%206.png" width="300"/></td>
+  </tr>
+  <tr>
+    <td align="center"><b>Analytics Main</b><br><img src="/ZeroLineImages/Analytics.png" width="300"/></td>
+    <td align="center"><b>Analytics 3</b><br><img src="/ZeroLineImages/Analytics3.png" width="300"/></td>
+    <td align="center"><b>Analytics 4</b><br><img src="/ZeroLineImages/Analytics4.png" width="300"/></td>
+  </tr>
+  <tr>
+    <td align="center"><b>Analytics 5</b><br><img src="/ZeroLineImages/Analytics5.png" width="300"/></td>
+    <td align="center"><b>Analytics 7</b><br><img src="/ZeroLineImages/Analytics7.png" width="300"/></td>
+    <td align="center"><b>Analytics Graph</b><br><img src="/ZeroLineImages/AnalyticsGraph.png" width="300"/></td>
+  </tr>
+  <tr>
+    <td align="center"><b>Analytics Graph 2</b><br><img src="/ZeroLineImages/AnalyticsGraph2.png" width="300"/></td>
+    <td align="center"><b>Calendar</b><br><img src="/ZeroLineImages/Calender.png" width="300"/></td>
+    <td align="center"><b>Planner</b><br><img src="/ZeroLineImages/Planner.png" width="300"/></td>
+  </tr>
+  <tr>
+    <td align="center"><b>Projects</b><br><img src="/ZeroLineImages/Projects.png" width="300"/></td>
+    <td></td>
+    <td></td>
+  </tr>
+</table>
 ## 🛠 Tech Stack
 
 ### Frontend
