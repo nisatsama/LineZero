@@ -87,7 +87,7 @@ Built with modern web technologies and deployed on **Google Cloud**, ZeroLine de
 * ![Analytics 7](/ZeroLineImages/Analytics7.png)
 * ![Analytics Graph](/ZeroLineImages/AnalyticsGraph.png)
 * ![Analytics Graph 2](/ZeroLineImages/AnalyticsGraph2.png)
-* ![Calendar](/ZeroLineImages/Calender.png)
+* 
 * ![Planner](/ZeroLineImages/Planner.png)
 * ![Projects](/ZeroLineImages/Projects.png)
 * ![Today](/ZeroLineImages/Today.png)
