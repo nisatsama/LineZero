@@ -93,12 +93,7 @@ Built with modern web technologies and deployed on **Google Cloud**, ZeroLine de
 * ![Today](/ZeroLineImages/Today.png)
 
 
-###Themes
- Themes based on the time of the day
-![Calendar](/ZeroLineImages/morning.png)
-![Calendar](/ZeroLineImages/afternoon.png)
-![Calendar](/ZeroLineImages/evening.png)
-![Calendar](/ZeroLineImages/night.png)
+
 ## 🛠 Tech Stack
 
 ### Frontend
@@ -166,17 +161,7 @@ https://github.com/nisatsama/LineZero
 
 ## 📸 Screenshots
 
-> Add screenshots of:
->
-> * Dashboard
-> * AI Productivity Coach
-> * Smart Planner
-> * Calendar
-> * Analytics Dashboard
-> * Pomodoro Timer
-> * Voice Assistant
 
----
 
 ## ⚙ Installation
 
@@ -208,28 +193,8 @@ npm run dev
 
 ## 📁 Project Structure
 
-```
-LineZero/
-│
-├── client/
-│   ├── src/
-│   ├── public/
-│   └── package.json
-│
-├── server/
-│   ├── controllers/
-│   ├── routes/
-│   ├── models/
-│   ├── middleware/
-│   └── package.json
-│
-├── README.md
-└── package.json
-```
 
-*(Modify according to your actual folder structure.)*
 
----
 
 ## 🎯 Problem Statement
 
@@ -264,15 +229,12 @@ Contributions are welcome!
 
 ---
 
-## 📄 License
-
-This project is licensed under the **MIT License**.
 
 ---
 
 ## 👨‍💻 Team
 
-Developed with ❤️ during a hackathon by the **ZeroLine Team**.
+Developed with ❤️ during the codingninjas X GoogleforDevelopers Vibe2Ship Hackathon  by Nisat Sama.
 
 ---
 
